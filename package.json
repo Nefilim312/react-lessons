@@ -1,0 +1,31 @@
+{
+  "name": "react-lesson",
+  "version": "1.0.0",
+  "description": "React lessons",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "NODE_ENV=development webpack",
+    "build-prod": "NODE_ENV=production webpack",
+    "start": "webpack-dev-server"
+  },
+  "author": "Dmitrii Ivanov",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
+    "react-router": "^5.2.0",
+    "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "webpack-dev-server": "^3.11.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "jest": "^26.2.2"
+  }
+}
