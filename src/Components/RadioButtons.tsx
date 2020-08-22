@@ -46,8 +46,8 @@ const RadioButtons: React.FC<RadioButtonsProps> = ({
   const [selectedValue, setSelectedValue] = useState(props.selectedValue);
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedValue(event.target.value);
-    onChange && onChange(event.target.value);
+    setSelectedValue(event?.target.value);
+    onChange && onChange(event?.target.value);
   };
 
   const Caption = caption ? (

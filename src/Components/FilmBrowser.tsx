@@ -9,36 +9,36 @@ interface FilmBrowserProps {
   dataLoadCallback?: (items: IFilm[]) => void;
 }
 
+export function sortFilms(filmSet: IFilm[], sortBy: 'date' | 'rating') {
+  return filmSet
+    .sort((a: IFilm, b: IFilm) => {
+      if (a[sortBy] < b[sortBy]) {
+        return 1;
+      } else if (a[sortBy] > b[sortBy]) {
+        return -1;
+      } else {
+        return 0;
+      }
+    })
+    .slice();
+}
+
+export function searchFilms(
+  filmSet: IFilm[],
+  searchValue: string,
+  searchBy: 'title' | 'genre'
+) {
+  return filmSet.filter((film: IFilm) =>
+    film[searchBy].toLowerCase().includes(searchValue.toLocaleLowerCase())
+  );
+}
+
 const FilmBrowser: React.FC<FilmBrowserProps> = ({
   filter,
   onItemClick,
   dataLoadCallback,
 }: FilmBrowserProps) => {
   const [films, setFilms] = useState(DemoData);
-
-  function sortFilms(filmSet: IFilm[], sortBy: 'date' | 'rating') {
-    return filmSet
-      .sort((a: IFilm, b: IFilm) => {
-        if (a[sortBy] < b[sortBy]) {
-          return 1;
-        } else if (a[sortBy] > b[sortBy]) {
-          return -1;
-        } else {
-          return 0;
-        }
-      })
-      .slice();
-  }
-
-  function searchFilms(
-    filmSet: IFilm[],
-    searchValue: string,
-    searchBy: 'title' | 'genre'
-  ) {
-    return filmSet.filter((film: IFilm) =>
-      film[searchBy].toLowerCase().includes(searchValue.toLocaleLowerCase())
-    );
-  }
 
   useEffect(() => {
     setFilms(
