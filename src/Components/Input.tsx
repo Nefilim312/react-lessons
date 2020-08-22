@@ -17,17 +17,19 @@ const useStyles = createUseStyles({
 
 export interface InputProps {
   placeholder?: string;
+  initialValue?: string;
   onChange?: (value: string) => void;
   onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const Input: React.FC<InputProps> = ({
   placeholder,
+  initialValue,
   onChange,
   onKeyPress,
 }: InputProps) => {
   const classes = useStyles();
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(initialValue || '');
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
