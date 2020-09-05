@@ -1,39 +1,58 @@
-import React, { useState, useEffect } from 'react';
-import Header from './Components/Header';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Footer from './Components/Footer';
 import MainPage from './Pages/MainPage';
-import { IFilm } from './interfaces';
 import FilmPage from './Pages/FilmPage';
 import { ErrorBoundary } from './Components/ErrorBoundary';
+import { requestMovies, resetFilter } from './redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from './redux/rootReducer';
+
+enum pages {
+  main = 'main',
+  film = 'film',
+}
 
 const App: React.FC = () => {
-  const [activePage, setActivePage] = useState<'main' | 'film'>('main');
-  const [film, setFilm] = useState<IFilm | undefined>(undefined);
+  const [activePage, setActivePage] = useState<pages>(pages.main);
+  const [film, setFilm] = useState<IFilm>();
+  const dispatch = useDispatch();
+  const filter = useSelector((state: RootState) => state.filter);
+  const isInitialRequest = useRef(true);
 
-  const openFilmHandler = (item: IFilm) => {
-    setActivePage('film');
-    setFilm(item);
-  };
+  const openFilmHandler = useCallback((film: IFilm) => {
+    setFilm(film);
+    setActivePage(pages.film);
+    window.scrollTo(0, 0);
+  }, []);
 
-  const backToMain = () => {
-    setActivePage('main');
-  };
+  const backToMain = useCallback(() => {
+    setActivePage(pages.main);
+    dispatch(resetFilter());
+    window.scrollTo(0, 0);
+  }, [dispatch]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [activePage, film]);
+    if (isInitialRequest.current) {
+      isInitialRequest.current = false;
+      dispatch(requestMovies(filter, false));
+    } else {
+      dispatch(requestMovies(filter));
+    }
+  }, [filter, dispatch]);
 
   return (
     <>
       <ErrorBoundary>
-        {activePage === 'main' ? (
+        {activePage === pages.main ? (
           <MainPage openFilm={openFilmHandler} />
         ) : (
-          <FilmPage
-            film={film as IFilm}
-            onBackButtonClick={backToMain}
-            openFilm={openFilmHandler}
-          />
+          film && (
+            <FilmPage
+              film={film}
+              onBackButtonClick={backToMain}
+              openFilm={openFilmHandler}
+            />
+          )
         )}
       </ErrorBoundary>
       <Footer />

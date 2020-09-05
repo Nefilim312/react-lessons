@@ -1,16 +1,6 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles({
-  logo: {
-    color: 'var(--red)',
-    fontSize: '1.3rem',
-  },
-  bold: {
-    fontWeight: 900,
-  },
-});
-
 const Logo: React.FC = () => {
   const classes = useStyles();
 
@@ -20,5 +10,15 @@ const Logo: React.FC = () => {
     </div>
   );
 };
+
+const useStyles = createUseStyles({
+  logo: {
+    color: 'var(--red)',
+    fontSize: '1.3rem',
+  },
+  bold: {
+    fontWeight: 900,
+  },
+});
 
 export default Logo;

@@ -1,7 +1,35 @@
 import React from 'react';
-import { IFilm } from '../interfaces';
 import FilmTile from './FilmTile';
 import { createUseStyles } from 'react-jss';
+import { Loader } from './Loader/Loader';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/rootReducer';
+
+interface FilmListProps {
+  films: IFilm[];
+  onItemClick: (item: IFilm) => void;
+}
+
+const FilmList: React.FC<FilmListProps> = ({ onItemClick, films }) => {
+  const classes = useStyles();
+  const loading = useSelector((state: RootState) => state.loading);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (films.length) {
+    return (
+      <div className={classes.filmList}>
+        {films.map((film) => (
+          <FilmTile key={film.id} filmData={film} onClick={onItemClick} />
+        ))}
+      </div>
+    );
+  } else {
+    return <div className={classes.empty}>No films found</div>;
+  }
+};
 
 const useStyles = createUseStyles({
   filmList: {
@@ -20,29 +48,5 @@ const useStyles = createUseStyles({
     background: 'var(--backGroundGrey)',
   },
 });
-
-interface FilmListProps {
-  filmSet: IFilm[];
-  onItemClick: (item: IFilm) => void;
-}
-
-const FilmList: React.FC<FilmListProps> = ({
-  filmSet,
-  onItemClick,
-}: FilmListProps) => {
-  const classes = useStyles();
-
-  if (filmSet.length) {
-    return (
-      <div className={classes.filmList}>
-        {filmSet.map((film, idx) => (
-          <FilmTile onClick={onItemClick} filmData={film} key={idx}></FilmTile>
-        ))}
-      </div>
-    );
-  } else {
-    return <div className={classes.empty}>No films found</div>;
-  }
-};
 
 export default FilmList;

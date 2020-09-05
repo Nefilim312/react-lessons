@@ -1,100 +1,430 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FilmList component should be render demo data (6 elements) 1`] = `
-<div
-  className="filmList-0-2-1"
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
 >
-  <FilmTile
-    filmData={
-      Object {
-        "date": "1995",
-        "description": "Four interlocking tales that take place in a fading hotel on New Year's Eve.",
-        "genre": "Comedy",
-        "img": "https://m.media-amazon.com/images/M/MV5BNDc3Y2YwMjUtYzlkMi00MTljLTg1ZGMtYzUwODljZTI1OTZjXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg",
-        "length": "98",
-        "rating": "6.8",
-        "title": "Four Rooms",
-      }
+  <FilmList
+    films={
+      Array [
+        Object {
+          "genres": Array [
+            "Drama",
+            "Romance",
+          ],
+          "id": 337167,
+          "overview": "Believing they have left behind shadowy figures from their past, newlyweds Christian and Ana fully embrace an inextricable connection and shared life of luxury. But just as she steps into her role as Mrs. Grey and he relaxes into an unfamiliar stability, new threats could jeopardize their happy ending before it even begins.",
+          "poster_path": "https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg",
+          "release_date": "2018-02-07",
+          "runtime": 106,
+          "title": "Fifty Shades Freed",
+          "vote_average": 6.1,
+        },
+        Object {
+          "genres": Array [
+            "Animation",
+            "Adventure",
+            "Family",
+            "Comedy",
+          ],
+          "id": 269149,
+          "overview": "Determined to prove herself, Officer Judy Hopps, the first bunny on Zootopia's police force, jumps at the chance to crack her first case - even if it means partnering with scam-artist fox Nick Wilde to solve the mystery.",
+          "poster_path": "https://image.tmdb.org/t/p/w500/sM33SANp9z6rXW8Itn7NnG1GOEs.jpg",
+          "release_date": "2016-02-11",
+          "runtime": 108,
+          "title": "Zootopia",
+          "vote_average": 7.7,
+        },
+        Object {
+          "genres": Array [
+            "Fantasy",
+            "Adventure",
+            "Science Fiction",
+          ],
+          "id": 181808,
+          "overview": "Rey develops her newly discovered abilities with the guidance of Luke Skywalker, who is unsettled by the strength of her powers. Meanwhile, the Resistance prepares to do battle with the First Order.",
+          "poster_path": "https://image.tmdb.org/t/p/w500/kOVEVeg59E0wsnXmF9nrh6OmWII.jpg",
+          "release_date": "2017-12-13",
+          "runtime": 152,
+          "title": "Star Wars: The Last Jedi",
+          "vote_average": 7.1,
+        },
+        Object {
+          "genres": Array [
+            "Action",
+            "Adventure",
+            "Fantasy",
+            "Science Fiction",
+          ],
+          "id": 284054,
+          "overview": "King T'Challa returns home from America to the reclusive, technologically advanced African nation of Wakanda to serve as his country's new leader. However, T'Challa soon finds that he is challenged for the throne by factions within his own country as well as without.  Using powers reserved to Wakandan kings, T'Challa assumes the Black Panther mantel to join with girlfriend Nakia, the queen-mother, his princess-kid sister,  members of the Dora Milaje (the Wakandan \\"special forces\\"), and an American secret agent, to prevent Wakanda from being dragged into a world war.",
+          "poster_path": "https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg",
+          "release_date": "2018-02-13",
+          "runtime": 134,
+          "title": "Black Panther",
+          "vote_average": 7.3,
+        },
+        Object {
+          "genres": Array [
+            "Adventure",
+            "Comedy",
+            "Family",
+            "Animation",
+          ],
+          "id": 354912,
+          "overview": "Despite his family’s baffling generations-old ban on music, Miguel dreams of becoming an accomplished musician like his idol, Ernesto de la Cruz. Desperate to prove his talent, Miguel finds himself in the stunning and colorful Land of the Dead following a mysterious chain of events. Along the way, he meets charming trickster Hector, and together, they set off on an extraordinary journey to unlock the real story behind Miguel's family history.",
+          "poster_path": "https://image.tmdb.org/t/p/w500/eKi8dIrr8voobbaGzDpe8w0PVbC.jpg",
+          "release_date": "2017-10-27",
+          "runtime": 105,
+          "title": "Coco",
+          "vote_average": 7.8,
+        },
+        Object {
+          "genres": Array [
+            "Adventure",
+            "Science Fiction",
+            "Action",
+          ],
+          "id": 333339,
+          "overview": "When the creator of a popular video game system dies, a virtual contest is created to compete for his fortune.",
+          "poster_path": "https://image.tmdb.org/t/p/w500/pU1ULUq8D3iRxl1fdX2lZIzdHuI.jpg",
+          "release_date": "2018-03-28",
+          "runtime": 140,
+          "title": "Ready Player One",
+          "vote_average": 8.1,
+        },
+      ]
     }
-    key="0"
-    onClick={[Function]}
-  />
-  <FilmTile
-    filmData={
-      Object {
-        "date": "1997",
-        "description": "A middle-aged woman finds herself in the middle of a huge conflict that will either make her a profit or cost her life.",
-        "genre": "Crime, Drama, Thriller",
-        "img": "https://m.media-amazon.com/images/M/MV5BNmY5ODRmYTItNWU0Ni00MWE3LTgyYzUtYjZlN2Q5YTcyM2NmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SY1000_CR0,0,683,1000_AL_.jpg",
-        "length": "154",
-        "rating": "7.5",
-        "title": "Jackie Brown",
-      }
-    }
-    key="1"
-    onClick={[Function]}
-  />
-  <FilmTile
-    filmData={
-      Object {
-        "date": "2003",
-        "description": "After awakening from a four-year coma, a former assassin wreaks vengeance on the team of assassins who betrayed her.",
-        "genre": "Action, Crime, Thriller",
-        "img": "https://m.media-amazon.com/images/M/MV5BNzM3NDFhYTAtYmU5Mi00NGRmLTljYjgtMDkyODQ4MjNkMGY2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg",
-        "length": "111",
-        "rating": "8.1",
-        "title": "Kill Bill: Vol. 1",
-      }
-    }
-    key="2"
-    onClick={[Function]}
-  />
-  <FilmTile
-    filmData={
-      Object {
-        "date": "1994",
-        "description": "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
-        "genre": "Crime, Drama",
-        "img": "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,686,1000_AL_.jpg",
-        "length": "154",
-        "rating": "8.9",
-        "title": "Pulp Fiction",
-      }
-    }
-    key="3"
-    onClick={[Function]}
-  />
-  <FilmTile
-    filmData={
-      Object {
-        "date": "1992",
-        "description": "When a simple jewelry heist goes horribly wrong, the surviving criminals begin to suspect that one of them is a police informant.",
-        "genre": "Crime, Drama, Thriller",
-        "img": "https://m.media-amazon.com/images/M/MV5BZmExNmEwYWItYmQzOS00YjA5LTk2MjktZjEyZDE1Y2QxNjA1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg",
-        "length": "94",
-        "rating": "8.3",
-        "title": "Reservoir Dogs",
-      }
-    }
-    key="4"
-    onClick={[Function]}
-  />
-  <FilmTile
-    filmData={
-      Object {
-        "date": "2004",
-        "description": "The Bride continues her quest of vengeance against her former boss and lover Bill, the reclusive bouncer Budd, and the treacherous, one-eyed Elle.",
-        "genre": "Action, Crime, Thriller",
-        "img": "https://m.media-amazon.com/images/M/MV5BNmFiYmJmN2QtNWQwMi00MzliLThiOWMtZjQxNGRhZTQ1MjgyXkEyXkFqcGdeQXVyNzQ1ODk3MTQ@._V1_.jpg",
-        "length": "137",
-        "rating": "8.0",
-        "title": "Kill Bill: Vol. 2",
-      }
-    }
-    key="5"
-    onClick={[Function]}
-  />
-</div>
+    onItemClick={[Function]}
+  >
+    <div
+      className="filmList-0-2-1"
+    >
+      <FilmTile
+        filmData={
+          Object {
+            "genres": Array [
+              "Drama",
+              "Romance",
+            ],
+            "id": 337167,
+            "overview": "Believing they have left behind shadowy figures from their past, newlyweds Christian and Ana fully embrace an inextricable connection and shared life of luxury. But just as she steps into her role as Mrs. Grey and he relaxes into an unfamiliar stability, new threats could jeopardize their happy ending before it even begins.",
+            "poster_path": "https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg",
+            "release_date": "2018-02-07",
+            "runtime": 106,
+            "title": "Fifty Shades Freed",
+            "vote_average": 6.1,
+          }
+        }
+        key="337167"
+        onClick={[Function]}
+      >
+        <div
+          className="filmTile-0-2-3"
+          onClick={[Function]}
+        >
+          <img
+            alt="Fifty Shades Freed"
+            className="image-0-2-8"
+            src="https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg"
+          />
+          <div>
+            <div
+              className="titleAndDate-0-2-4"
+            >
+              <div
+                className="title-0-2-5"
+              >
+                Fifty Shades Freed
+              </div>
+              <div
+                className="date-0-2-6"
+              >
+                2018
+              </div>
+            </div>
+            <div
+              className="genre-0-2-7"
+            >
+              Drama, Romance
+            </div>
+          </div>
+        </div>
+      </FilmTile>
+      <FilmTile
+        filmData={
+          Object {
+            "genres": Array [
+              "Animation",
+              "Adventure",
+              "Family",
+              "Comedy",
+            ],
+            "id": 269149,
+            "overview": "Determined to prove herself, Officer Judy Hopps, the first bunny on Zootopia's police force, jumps at the chance to crack her first case - even if it means partnering with scam-artist fox Nick Wilde to solve the mystery.",
+            "poster_path": "https://image.tmdb.org/t/p/w500/sM33SANp9z6rXW8Itn7NnG1GOEs.jpg",
+            "release_date": "2016-02-11",
+            "runtime": 108,
+            "title": "Zootopia",
+            "vote_average": 7.7,
+          }
+        }
+        key="269149"
+        onClick={[Function]}
+      >
+        <div
+          className="filmTile-0-2-3"
+          onClick={[Function]}
+        >
+          <img
+            alt="Zootopia"
+            className="image-0-2-8"
+            src="https://image.tmdb.org/t/p/w500/sM33SANp9z6rXW8Itn7NnG1GOEs.jpg"
+          />
+          <div>
+            <div
+              className="titleAndDate-0-2-4"
+            >
+              <div
+                className="title-0-2-5"
+              >
+                Zootopia
+              </div>
+              <div
+                className="date-0-2-6"
+              >
+                2016
+              </div>
+            </div>
+            <div
+              className="genre-0-2-7"
+            >
+              Animation, Adventure, Family, Comedy
+            </div>
+          </div>
+        </div>
+      </FilmTile>
+      <FilmTile
+        filmData={
+          Object {
+            "genres": Array [
+              "Fantasy",
+              "Adventure",
+              "Science Fiction",
+            ],
+            "id": 181808,
+            "overview": "Rey develops her newly discovered abilities with the guidance of Luke Skywalker, who is unsettled by the strength of her powers. Meanwhile, the Resistance prepares to do battle with the First Order.",
+            "poster_path": "https://image.tmdb.org/t/p/w500/kOVEVeg59E0wsnXmF9nrh6OmWII.jpg",
+            "release_date": "2017-12-13",
+            "runtime": 152,
+            "title": "Star Wars: The Last Jedi",
+            "vote_average": 7.1,
+          }
+        }
+        key="181808"
+        onClick={[Function]}
+      >
+        <div
+          className="filmTile-0-2-3"
+          onClick={[Function]}
+        >
+          <img
+            alt="Star Wars: The Last Jedi"
+            className="image-0-2-8"
+            src="https://image.tmdb.org/t/p/w500/kOVEVeg59E0wsnXmF9nrh6OmWII.jpg"
+          />
+          <div>
+            <div
+              className="titleAndDate-0-2-4"
+            >
+              <div
+                className="title-0-2-5"
+              >
+                Star Wars: The Last Jedi
+              </div>
+              <div
+                className="date-0-2-6"
+              >
+                2017
+              </div>
+            </div>
+            <div
+              className="genre-0-2-7"
+            >
+              Fantasy, Adventure, Science Fiction
+            </div>
+          </div>
+        </div>
+      </FilmTile>
+      <FilmTile
+        filmData={
+          Object {
+            "genres": Array [
+              "Action",
+              "Adventure",
+              "Fantasy",
+              "Science Fiction",
+            ],
+            "id": 284054,
+            "overview": "King T'Challa returns home from America to the reclusive, technologically advanced African nation of Wakanda to serve as his country's new leader. However, T'Challa soon finds that he is challenged for the throne by factions within his own country as well as without.  Using powers reserved to Wakandan kings, T'Challa assumes the Black Panther mantel to join with girlfriend Nakia, the queen-mother, his princess-kid sister,  members of the Dora Milaje (the Wakandan \\"special forces\\"), and an American secret agent, to prevent Wakanda from being dragged into a world war.",
+            "poster_path": "https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg",
+            "release_date": "2018-02-13",
+            "runtime": 134,
+            "title": "Black Panther",
+            "vote_average": 7.3,
+          }
+        }
+        key="284054"
+        onClick={[Function]}
+      >
+        <div
+          className="filmTile-0-2-3"
+          onClick={[Function]}
+        >
+          <img
+            alt="Black Panther"
+            className="image-0-2-8"
+            src="https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg"
+          />
+          <div>
+            <div
+              className="titleAndDate-0-2-4"
+            >
+              <div
+                className="title-0-2-5"
+              >
+                Black Panther
+              </div>
+              <div
+                className="date-0-2-6"
+              >
+                2018
+              </div>
+            </div>
+            <div
+              className="genre-0-2-7"
+            >
+              Action, Adventure, Fantasy, Science Fiction
+            </div>
+          </div>
+        </div>
+      </FilmTile>
+      <FilmTile
+        filmData={
+          Object {
+            "genres": Array [
+              "Adventure",
+              "Comedy",
+              "Family",
+              "Animation",
+            ],
+            "id": 354912,
+            "overview": "Despite his family’s baffling generations-old ban on music, Miguel dreams of becoming an accomplished musician like his idol, Ernesto de la Cruz. Desperate to prove his talent, Miguel finds himself in the stunning and colorful Land of the Dead following a mysterious chain of events. Along the way, he meets charming trickster Hector, and together, they set off on an extraordinary journey to unlock the real story behind Miguel's family history.",
+            "poster_path": "https://image.tmdb.org/t/p/w500/eKi8dIrr8voobbaGzDpe8w0PVbC.jpg",
+            "release_date": "2017-10-27",
+            "runtime": 105,
+            "title": "Coco",
+            "vote_average": 7.8,
+          }
+        }
+        key="354912"
+        onClick={[Function]}
+      >
+        <div
+          className="filmTile-0-2-3"
+          onClick={[Function]}
+        >
+          <img
+            alt="Coco"
+            className="image-0-2-8"
+            src="https://image.tmdb.org/t/p/w500/eKi8dIrr8voobbaGzDpe8w0PVbC.jpg"
+          />
+          <div>
+            <div
+              className="titleAndDate-0-2-4"
+            >
+              <div
+                className="title-0-2-5"
+              >
+                Coco
+              </div>
+              <div
+                className="date-0-2-6"
+              >
+                2017
+              </div>
+            </div>
+            <div
+              className="genre-0-2-7"
+            >
+              Adventure, Comedy, Family, Animation
+            </div>
+          </div>
+        </div>
+      </FilmTile>
+      <FilmTile
+        filmData={
+          Object {
+            "genres": Array [
+              "Adventure",
+              "Science Fiction",
+              "Action",
+            ],
+            "id": 333339,
+            "overview": "When the creator of a popular video game system dies, a virtual contest is created to compete for his fortune.",
+            "poster_path": "https://image.tmdb.org/t/p/w500/pU1ULUq8D3iRxl1fdX2lZIzdHuI.jpg",
+            "release_date": "2018-03-28",
+            "runtime": 140,
+            "title": "Ready Player One",
+            "vote_average": 8.1,
+          }
+        }
+        key="333339"
+        onClick={[Function]}
+      >
+        <div
+          className="filmTile-0-2-3"
+          onClick={[Function]}
+        >
+          <img
+            alt="Ready Player One"
+            className="image-0-2-8"
+            src="https://image.tmdb.org/t/p/w500/pU1ULUq8D3iRxl1fdX2lZIzdHuI.jpg"
+          />
+          <div>
+            <div
+              className="titleAndDate-0-2-4"
+            >
+              <div
+                className="title-0-2-5"
+              >
+                Ready Player One
+              </div>
+              <div
+                className="date-0-2-6"
+              >
+                2018
+              </div>
+            </div>
+            <div
+              className="genre-0-2-7"
+            >
+              Adventure, Science Fiction, Action
+            </div>
+          </div>
+        </div>
+      </FilmTile>
+    </div>
+  </FilmList>
+</Provider>
 `;
 
 exports[`FilmList component should be render text "No films found" 1`] = `

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import FilmTile from '../Components/FilmTile';
-import DemoData from '../DemoData';
+import DemoData from './DemoData';
 
 it('renders without crashing', () => {
   shallow(<FilmTile filmData={DemoData[0]} onClick={() => {}} />);

@@ -3,17 +3,6 @@ import { createUseStyles } from 'react-jss';
 import Button from './Button';
 import classNames from 'classnames';
 
-const useStyles = createUseStyles({
-  input: {
-    position: 'absolute',
-    clip: 'rect(0,0,0,0)',
-    pointerEvents: 'none',
-  },
-  notChecked: {
-    background: 'var(--darkGrey-transparent)',
-  },
-});
-
 interface ToggleButtonProps {
   className?: string;
   caption: string;
@@ -30,8 +19,7 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({
   value,
   checked,
   onChange,
-  ...props
-}: ToggleButtonProps) => {
+}) => {
   const classes = useStyles();
 
   return (
@@ -51,5 +39,16 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({
     </Button>
   );
 };
+
+const useStyles = createUseStyles({
+  input: {
+    position: 'absolute',
+    clip: 'rect(0,0,0,0)',
+    pointerEvents: 'none',
+  },
+  notChecked: {
+    background: 'var(--darkGrey-transparent)',
+  },
+});
 
 export default ToggleButton;
