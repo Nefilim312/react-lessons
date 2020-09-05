@@ -1,5 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { createUseStyles } from 'react-jss';
+
+export interface InputProps {
+  placeholder?: string;
+  initialValue?: string;
+  onChange?: (value: string) => void;
+  onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+}
+
+const Input: React.FC<InputProps> = ({
+  placeholder,
+  initialValue,
+  onChange,
+  onKeyPress,
+}) => {
+  const classes = useStyles();
+  const [value, setValue] = useState(initialValue || '');
+
+  const changeHandler = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(event.target.value);
+
+      if (onChange) {
+        onChange(event.target.value);
+      }
+    },
+    [onChange]
+  );
+
+  return (
+    <input
+      className={classes.input}
+      type='text'
+      placeholder={placeholder}
+      value={value}
+      onChange={changeHandler}
+      onKeyPress={onKeyPress}
+    />
+  );
+};
 
 const useStyles = createUseStyles({
   input: {
@@ -14,41 +53,5 @@ const useStyles = createUseStyles({
     outline: 'none',
   },
 });
-
-export interface InputProps {
-  placeholder?: string;
-  initialValue?: string;
-  onChange?: (value: string) => void;
-  onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-}
-
-const Input: React.FC<InputProps> = ({
-  placeholder,
-  initialValue,
-  onChange,
-  onKeyPress,
-}: InputProps) => {
-  const classes = useStyles();
-  const [value, setValue] = useState(initialValue || '');
-
-  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-
-    if (onChange) {
-      onChange(event.target.value);
-    }
-  };
-
-  return (
-    <input
-      className={classes.input}
-      type='text'
-      placeholder={placeholder}
-      value={value}
-      onChange={changeHandler}
-      onKeyPress={onKeyPress}
-    />
-  );
-};
 
 export default Input;

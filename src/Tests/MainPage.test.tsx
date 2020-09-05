@@ -1,13 +1,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import App from '../App';
 import { Provider } from 'react-redux';
 import { store } from '../redux/store';
+import MainPage from '../Pages/MainPage';
 
 it('renders without crashing', () => {
   mount(
     <Provider store={store}>
-      <App />
+      <MainPage openFilm={jest.fn()} />
     </Provider>
   );
 });

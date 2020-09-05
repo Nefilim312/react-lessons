@@ -1,11 +1,87 @@
-import React from 'react';
-import { IFilm } from '../interfaces';
+import React, { useEffect } from 'react';
 import Logo from '../Components/Logo';
 import { createUseStyles } from 'react-jss';
 import classNames from 'classnames';
 import StateRow from '../Components/StateRow';
 import FilmList from '../Components/FilmList';
-import FilmBrowser from '../Components/FilmBrowser';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeFilter } from '../redux/actions';
+import { RootState } from '../redux/rootReducer';
+
+interface FilmPageProps {
+  film: IFilm;
+  onBackButtonClick: () => void;
+  openFilm: (item: IFilm) => void;
+}
+
+const FilmPage: React.FC<FilmPageProps> = ({
+  film,
+  onBackButtonClick,
+  openFilm,
+}) => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      changeFilter({
+        search: '',
+        searchBy: 'title',
+        sortBy: 'vote_average',
+        limit: '3',
+        filter: film.genres.toString(),
+      })
+    );
+  }, [dispatch, film]);
+
+  const films = useSelector((state: RootState) => state.movies);
+
+  return (
+    <>
+      <div className={classes.filmPage}>
+        <div className={classes.top}>
+          <Logo />
+          <span
+            onClick={onBackButtonClick}
+            className={classNames('material-icons', classes.backButton)}
+          >
+            search
+          </span>
+        </div>
+        <div className={classes.contentContainer}>
+          <div className={classes.imageContainer}>
+            <img
+              className={classes.image}
+              src={film.poster_path}
+              alt={film.title}
+            />
+          </div>
+          <div className={classes.filmInfo}>
+            <div className={classes.titleAndRating}>
+              <div className={classes.title}>{film.title}</div>
+              <div className={classes.rating}>{film.vote_average}</div>
+            </div>
+            <div className={classes.genre}>{film.genres.join(', ')}</div>
+            <div className={classes.yearAndLength}>
+              <div className={classes.year}>
+                {new Date(film.release_date).getFullYear()}
+              </div>
+              {film.runtime ? <div>{film.runtime} min</div> : null}
+            </div>
+            <div className={classes.description}>{film.overview}</div>
+          </div>
+        </div>
+      </div>
+
+      <StateRow>
+        <div className={classes.searchByGenre}>
+          Films by {film.genres.join(', ')} genre
+        </div>
+      </StateRow>
+      <FilmList films={films} onItemClick={openFilm} />
+    </>
+  );
+};
 
 const useStyles = createUseStyles({
   filmPage: {
@@ -49,6 +125,9 @@ const useStyles = createUseStyles({
     borderRadius: '50%',
     padding: '1rem',
     marginLeft: '2rem',
+    height: '2.4rem',
+    width: '2.4rem',
+    textAlign: 'center',
   },
   titleAndRating: {
     display: 'flex',
@@ -81,60 +160,5 @@ const useStyles = createUseStyles({
     alignSelf: 'center',
   },
 });
-
-interface FilmPageProps {
-  film: IFilm;
-  onBackButtonClick: () => void;
-  openFilm: (item: IFilm) => void;
-}
-
-const FilmPage: React.FC<FilmPageProps> = ({
-  film,
-  onBackButtonClick,
-  openFilm,
-}: FilmPageProps) => {
-  const classes = useStyles();
-
-  return (
-    <>
-      <div className={classes.filmPage}>
-        <div className={classes.top}>
-          <Logo />
-          <span
-            onClick={onBackButtonClick}
-            className={classNames('material-icons', classes.backButton)}
-          >
-            search
-          </span>
-        </div>
-        <div className={classes.contentContainer}>
-          <div className={classes.imageContainer}>
-            <img className={classes.image} src={film.img} alt={film.title} />
-          </div>
-          <div className={classes.filmInfo}>
-            <div className={classes.titleAndRating}>
-              <div className={classes.title}>{film.title}</div>
-              <div className={classes.rating}>{film.rating}</div>
-            </div>
-            <div className={classes.genre}>{film.genre}</div>
-            <div className={classes.yearAndLength}>
-              <div className={classes.year}>{film.date}</div>
-              <div>{film.length} min</div>
-            </div>
-            <div className={classes.description}>{film.description}</div>
-          </div>
-        </div>
-      </div>
-
-      <StateRow>
-        <div className={classes.searchByGenre}>Films by {film.genre} genre</div>
-      </StateRow>
-      <FilmBrowser
-        filter={{ searchValue: film.genre, searchBy: 'genre', sortBy: 'date' }}
-        onItemClick={openFilm}
-      />
-    </>
-  );
-};
 
 export default FilmPage;

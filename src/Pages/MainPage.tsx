@@ -1,12 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import RadioButtons from '../Components/RadioButtons';
 import FilmList from '../Components/FilmList';
-import DemoData from '../DemoData';
 import StateRow from '../Components/StateRow';
-import { IFilm } from '../interfaces';
 import { createUseStyles } from 'react-jss';
 import Header from '../Components/Header';
-import FilmBrowser from '../Components/FilmBrowser';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeFilter } from '../redux/actions';
+import { RootState } from '../redux/rootReducer';
+
+interface MainPageProps {
+  openFilm: (item: IFilm) => void;
+}
+
+const MainPage: React.FC<MainPageProps> = ({ openFilm }) => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const filter = useSelector((state: RootState) => state.filter);
+  const films = useSelector((state: RootState) => state.movies);
+  const counter = films.length;
+
+  return (
+    <>
+      <Header
+        onSearch={(searchValue) =>
+          dispatch(changeFilter({ ...filter, search: searchValue }))
+        }
+        onSearchByChanged={(searchBy) => {
+          if (filter.search) {
+            dispatch(changeFilter({ ...filter, searchBy }));
+          }
+        }}
+      />
+      <StateRow>
+        <div className={classes.searchCounter}>
+          {filter?.search && counter ? counter + ' movie found' : null}
+        </div>
+        <RadioButtons
+          caption='SORT BY'
+          buttons={[
+            { value: 'release_date', title: 'RELEASE DATE' },
+            { value: 'vote_average', title: 'RATING' },
+          ]}
+          selectedValue='release_date'
+          onChange={(sortBy) => dispatch(changeFilter({ ...filter, sortBy }))}
+        />
+      </StateRow>
+
+      <FilmList films={films} onItemClick={openFilm} />
+    </>
+  );
+};
 
 const useStyles = createUseStyles({
   searchCounter: {
@@ -15,49 +58,5 @@ const useStyles = createUseStyles({
     alignSelf: 'center',
   },
 });
-
-interface MainPageProps {
-  openFilm: (item: IFilm) => void;
-}
-
-const MainPage: React.FC<MainPageProps> = ({ openFilm }: MainPageProps) => {
-  const classes = useStyles();
-  const [sortBy, setSortBy] = useState<'date' | 'rating'>('date');
-  const [searchValue, setSearchValue] = useState('');
-  const [searchBy, setSearchBy] = useState<'title' | 'genre'>('title');
-  const [counter, setCounter] = useState(0);
-
-  return (
-    <>
-      <Header onSearch={setSearchValue} onSearchByChanged={setSearchBy} />
-      <StateRow>
-        <div className={classes.searchCounter}>
-          {searchValue && counter ? counter + ' movie found' : null}
-        </div>
-        <RadioButtons
-          caption='SORT BY'
-          buttons={[
-            { value: 'date', title: 'RELEASE DATE' },
-            { value: 'rating', title: 'RATING' },
-          ]}
-          selectedValue='date'
-          onChange={setSortBy}
-        />
-      </StateRow>
-
-      <FilmBrowser
-        filter={{
-          searchValue,
-          searchBy,
-          sortBy,
-        }}
-        onItemClick={openFilm}
-        dataLoadCallback={(films: IFilm[]) => {
-          setCounter(films.length);
-        }}
-      />
-    </>
-  );
-};
 
 export default MainPage;

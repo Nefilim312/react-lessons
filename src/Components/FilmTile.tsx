@@ -1,6 +1,33 @@
 import React from 'react';
-import { IFilm } from '../interfaces';
 import { createUseStyles } from 'react-jss';
+
+interface FilmTileProps {
+  filmData: IFilm;
+  onClick: (item: IFilm) => void;
+}
+
+const FilmTile: React.FC<FilmTileProps> = ({ filmData, onClick }) => {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.filmTile} onClick={onClick.bind(null, filmData)}>
+      <img
+        className={classes.image}
+        src={filmData.poster_path}
+        alt={filmData.title}
+      />
+      <div>
+        <div className={classes.titleAndDate}>
+          <div className={classes.title}>{filmData.title}</div>
+          <div className={classes.date}>
+            {new Date(filmData.release_date).getFullYear()}
+          </div>
+        </div>
+        <div className={classes.genre}>{filmData.genres.join(', ')}</div>
+      </div>
+    </div>
+  );
+};
 
 const useStyles = createUseStyles({
   filmTile: {
@@ -8,6 +35,7 @@ const useStyles = createUseStyles({
     flexDirection: 'column',
     justifyContent: 'space-between',
     cursor: 'pointer',
+    overflow: 'hidden',
   },
   titleAndDate: {
     color: '#AFAFAF',
@@ -22,37 +50,16 @@ const useStyles = createUseStyles({
     border: '1px solid var(--grey)',
     padding: '.2rem .5rem',
     borderRadius: 'var(--borderSize)',
+    height: '1.18rem',
   },
-  genre: {
-    color: '#7D7D7D',
-    marginTop: '.5rem',
-  },
+  genre: `
+    color: #7D7D7D;
+    marginTop: .5rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  `,
   image: { width: '100%' },
 });
-
-interface FilmTileProps {
-  filmData: IFilm;
-  onClick: (item: IFilm) => void;
-}
-
-const FilmTile: React.FC<FilmTileProps> = ({
-  filmData,
-  onClick,
-}: FilmTileProps) => {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.filmTile} onClick={onClick.bind(null, filmData)}>
-      <img className={classes.image} src={filmData.img} alt={filmData.title} />
-      <div>
-        <div className={classes.titleAndDate}>
-          <div className={classes.title}>{filmData.title}</div>
-          <div className={classes.date}>{filmData.date}</div>
-        </div>
-        <div className={classes.genre}>{filmData.genre}</div>
-      </div>
-    </div>
-  );
-};
 
 export default FilmTile;

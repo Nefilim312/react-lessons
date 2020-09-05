@@ -1,7 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import ToggleButton from './ToggleButton';
 import { createUseStyles } from 'react-jss';
 import classNames from 'classnames';
+
+interface RadioButtonsProps {
+  caption?: string;
+  className?: string;
+  buttons: { value: string; title: string }[];
+  selectedValue: string;
+  onChange?: (value: any) => void;
+}
+
+const RadioButtons: React.FC<RadioButtonsProps> = ({
+  caption,
+  className,
+  buttons,
+  onChange,
+  ...props
+}) => {
+  const classes = useStyles();
+  const [selectedValue, setSelectedValue] = useState(props.selectedValue);
+
+  const changeHandler = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSelectedValue(event?.target.value);
+      onChange && onChange(event?.target.value);
+    },
+    [onChange]
+  );
+
+  return (
+    <div className={classNames(classes.toggleButtonGroup, className)}>
+      {caption && <span className={classes.caption}>{caption}</span>}
+
+      {buttons.map((button) => (
+        <ToggleButton
+          caption={button.title}
+          key={button.value}
+          type='radio'
+          value={button.value}
+          checked={selectedValue === button.value}
+          onChange={changeHandler}
+        />
+      ))}
+    </div>
+  );
+};
 
 const useStyles = createUseStyles({
   toggleButtonGroup: {
@@ -25,51 +69,5 @@ const useStyles = createUseStyles({
     fontWeight: '400',
   },
 });
-
-interface RadioButtonsProps {
-  caption?: string;
-  className?: string;
-  buttons: { value: string; title: string }[];
-  selectedValue: string;
-  onChange?: (value: any) => void;
-}
-
-const RadioButtons: React.FC<RadioButtonsProps> = ({
-  caption,
-  className,
-  buttons,
-  onChange,
-  ...props
-}: RadioButtonsProps) => {
-  const classes = useStyles();
-
-  const [selectedValue, setSelectedValue] = useState(props.selectedValue);
-
-  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedValue(event?.target.value);
-    onChange && onChange(event?.target.value);
-  };
-
-  const Caption = caption ? (
-    <span className={classes.caption}>{caption}</span>
-  ) : null;
-
-  return (
-    <div className={classNames(classes.toggleButtonGroup, className)}>
-      {Caption}
-
-      {buttons.map((button) => (
-        <ToggleButton
-          caption={button.title}
-          key={button.value}
-          type='radio'
-          value={button.value}
-          checked={selectedValue === button.value}
-          onChange={changeHandler}
-        ></ToggleButton>
-      ))}
-    </div>
-  );
-};
 
 export default RadioButtons;
