@@ -61,18 +61,15 @@ describe('Actions', () => {
   });
 
   it('should request films', async () => {
-    const expectedActions = [
-      { type: types.SHOW_LOADER },
-      { type: types.HIDE_LOADER },
-      { type: types.REQUEST_MOVIES, payload: [] },
-    ];
-    const store = mockStore({});
+    const expectedActions = [{ type: types.REQUEST_MOVIES, payload: [] }];
+    const store = mockStore({ mainPage: {} });
 
     //@ts-ignore
     const films = await store.dispatch(actions.requestMovies());
 
     expect(films.length).not.toEqual(0);
-    store.getActions()[2].payload = [];
+
+    store.getActions()[0].payload = [];
     expect(store.getActions()).toEqual(expectedActions);
   });
 });

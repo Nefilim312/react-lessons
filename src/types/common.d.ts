@@ -17,8 +17,19 @@ interface IFilter {
   filter?: string;
 }
 
-interface IState {
+interface IMainPageState {
   movies: IFilm[];
   filter: IFilter;
   loading: boolean;
 }
+
+interface IFilmPageState {
+  movies: IFilm[];
+  film: IFilm;
+  loading: boolean;
+}
+
+type IState = {
+  mainPage: IMainPageState;
+  filmPage: IFilmPageState;
+};

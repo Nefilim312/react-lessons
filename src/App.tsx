@@ -1,63 +1,85 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import Footer from './Components/Footer';
-import MainPage from './Pages/MainPage';
-import FilmPage from './Pages/FilmPage';
-import { ErrorBoundary } from './Components/ErrorBoundary';
-import { requestMovies, resetFilter } from './redux/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from './redux/rootReducer';
-
-enum pages {
-  main = 'main',
-  film = 'film',
-}
+import React from 'react';
+import MainPage from './pages/MainPage/MainPage';
+import FilmPage from './pages/FilmPage/FilmPage';
+import NotFound from './pages/NotFound/NotFound';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { createUseStyles } from 'react-jss';
+import { BACKGROUND } from './constants/styles';
 
 const App: React.FC = () => {
-  const [activePage, setActivePage] = useState<pages>(pages.main);
-  const [film, setFilm] = useState<IFilm>();
-  const dispatch = useDispatch();
-  const filter = useSelector((state: RootState) => state.filter);
-  const isInitialRequest = useRef(true);
-
-  const openFilmHandler = useCallback((film: IFilm) => {
-    setFilm(film);
-    setActivePage(pages.film);
-    window.scrollTo(0, 0);
-  }, []);
-
-  const backToMain = useCallback(() => {
-    setActivePage(pages.main);
-    dispatch(resetFilter());
-    window.scrollTo(0, 0);
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (isInitialRequest.current) {
-      isInitialRequest.current = false;
-      dispatch(requestMovies(filter, false));
-    } else {
-      dispatch(requestMovies(filter));
-    }
-  }, [filter, dispatch]);
+  useStyles();
 
   return (
     <>
       <ErrorBoundary>
-        {activePage === pages.main ? (
-          <MainPage openFilm={openFilmHandler} />
-        ) : (
-          film && (
-            <FilmPage
-              film={film}
-              onBackButtonClick={backToMain}
-              openFilm={openFilmHandler}
-            />
-          )
-        )}
+        <BrowserRouter>
+          <Switch>
+            <Route exact path='/'>
+              <MainPage />
+            </Route>
+            <Route path='/search/:searchValue'>
+              <MainPage />
+            </Route>
+            <Route path='/film/:filmId'>
+              <FilmPage />
+            </Route>
+            <Route>
+              <NotFound />
+            </Route>
+          </Switch>
+          <ScrollToTop />
+        </BrowserRouter>
       </ErrorBoundary>
-      <Footer />
     </>
   );
 };
+
+const useStyles = createUseStyles({
+  '@global': {
+    html: `
+      height: 100%;
+      background-color: ${BACKGROUND};
+    `,
+    body: `
+      height: 100%;
+      background-color: ${BACKGROUND};
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    `,
+    input: `
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    `,
+    'a:any-link': `
+      text-decoration: none;
+    `,
+    '.material-icons': `
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      -moz-osx-font-smoothing: grayscale;
+      font-feature-settings: 'liga';
+    `,
+  },
+});
 
 export default App;
