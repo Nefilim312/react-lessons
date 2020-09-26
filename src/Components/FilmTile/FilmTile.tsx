@@ -1,6 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
 import { createUseStyles } from 'react-jss';
-import { Link } from 'react-router-dom';
 import { GREY, BORDER_SIZE } from '../../constants/styles';
 
 interface FilmTileProps {
@@ -11,7 +11,7 @@ const FilmTile: React.FC<FilmTileProps> = ({ filmData }) => {
   const classes = useStyles();
 
   return (
-    <Link to={'/film/' + filmData.id}>
+    <Link href={'/film/' + filmData.id}>
       <div className={classes.filmTile}>
         <div className={classes.imageContainer}>
           <img

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import RadioButtons from '../../components/RadioButtons/RadioButtons';
 import FilmList from '../../components/FilmList/FilmList';
 import StateRow from '../../components/StateRow/StateRow';
@@ -7,29 +7,19 @@ import Footer from '../../components/Footer/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFilter, requestMovies } from '../../redux/actions';
 import { createUseStyles } from 'react-jss';
-import { useParams, useHistory } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 const MainPage: React.FC = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [counter, setCounter] = useState(0);
-  const { searchValue } = useParams();
-  const isInitialRequest = useRef(true);
+  const router = useRouter();
+  const searchValue = router.query.searchValue as string;
 
   const filter = useSelector((state: IState) => state.mainPage.filter);
   const films = useSelector((state: IState) => state.mainPage.movies);
   const loading = useSelector((state: IState) => state.mainPage.loading);
-
-  useEffect(() => {
-    if (isInitialRequest.current) {
-      isInitialRequest.current = false;
-      dispatch(requestMovies({ ...filter, search: searchValue }, false));
-    } else {
-      dispatch(requestMovies({ ...filter, search: searchValue }));
-    }
-  }, [filter, dispatch, searchValue]);
 
   useEffect(() => {
     setCounter(films?.length || 0);
@@ -37,15 +27,15 @@ const MainPage: React.FC = () => {
 
   const searchHandler = useCallback(
     (searchValue: string) => {
-      if (searchValue) {
-        history.push(`/search/${searchValue}`);
-      } else {
-        history.push(`/`);
-      }
-
       dispatch(changeFilter({ ...filter, search: searchValue }));
+
+      if (searchValue) {
+        router.push(`/search/${searchValue}`);
+      } else {
+        router.push(`/`);
+      }
     },
-    [dispatch, filter, history]
+    [dispatch, filter, router]
   );
 
   return (
@@ -53,9 +43,8 @@ const MainPage: React.FC = () => {
       <Header
         onSearch={searchHandler}
         onSearchByChanged={(searchBy) => {
-          if (filter.search) {
-            dispatch(changeFilter({ ...filter, searchBy }));
-          }
+          dispatch(changeFilter({ ...filter, searchBy }));
+          dispatch(requestMovies({ ...filter, searchBy }));
         }}
         initialSearchValue={searchValue}
       />
@@ -70,7 +59,10 @@ const MainPage: React.FC = () => {
             { value: 'vote_average', title: 'RATING' },
           ]}
           selectedValue='release_date'
-          onChange={(sortBy) => dispatch(changeFilter({ ...filter, sortBy }))}
+          onChange={(sortBy) => {
+            dispatch(changeFilter({ ...filter, sortBy }));
+            dispatch(requestMovies({ ...filter, sortBy }));
+          }}
         />
       </StateRow>
 

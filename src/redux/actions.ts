@@ -20,6 +20,8 @@ export function requestMovies(filter?: IFilter, needShowLoader = true) {
     const url = new URL('https://reactjs-cdp.herokuapp.com/movies');
     const searchObj: { [key: string]: any } = {
       sortOrder: 'desc',
+      searchBy: 'title',
+      sortBy: 'release_date',
       limit: '9',
       ...filter,
     };
@@ -37,7 +39,13 @@ export function requestMovies(filter?: IFilter, needShowLoader = true) {
 }
 
 export function changeFilter(filter: IFilter) {
-  return { type: CHANGE_FILTER, payload: filter };
+  return async (dispatch: Dispatch) => {
+    if (!filter.search) {
+      dispatch({ type: REQUEST_MOVIES, payload: [] });
+    }
+
+    return dispatch({ type: CHANGE_FILTER, payload: filter });
+  };
 }
 
 export function resetFilter() {
@@ -55,7 +63,7 @@ export function hideLoader() {
   return { type: HIDE_LOADER };
 }
 
-export function loadFilm(filmId: number) {
+export function loadFilm(filmId: any) {
   return async (dispatch: Dispatch) => {
     const url = new URL(`https://reactjs-cdp.herokuapp.com/movies/${filmId}`);
 

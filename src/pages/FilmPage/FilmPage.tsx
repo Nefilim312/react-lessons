@@ -1,36 +1,25 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import Logo from '../../components/Logo/Logo';
 import StateRow from '../../components/StateRow/StateRow';
 import FilmList from '../../components/FilmList/FilmList';
 import Footer from '../../components/Footer/Footer';
+import Link from 'next/link';
 import { createUseStyles } from 'react-jss';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadFilm, requestSimilarMovies } from '../../redux/actions';
-import { useParams, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const FilmPage: React.FC = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const { filmId } = useParams();
 
   const film = useSelector((state: IState) => state.filmPage.film);
   const films = useSelector((state: IState) => state.filmPage.movies);
-
-  useEffect(() => {
-    dispatch(loadFilm(filmId));
-  }, [filmId, dispatch]);
-
-  useEffect(() => {
-    dispatch(requestSimilarMovies(film.genres));
-  }, [film, dispatch]);
 
   return (
     <>
       <div className={classes.filmPage}>
         <div className={classes.top}>
           <Logo />
-          <Link to='/'>
+          <Link href='/'>
             <span className={classNames('material-icons', classes.backButton)}>
               search
             </span>
@@ -52,7 +41,7 @@ const FilmPage: React.FC = () => {
             <div className={classes.genre}>{film.genres?.join(', ')}</div>
             <div className={classes.yearAndLength}>
               <div className={classes.year}>
-                {new Date(film.release_date).getFullYear()}
+                {film.release_date && new Date(film.release_date).getFullYear()}
               </div>
               {film.runtime ? <div>{film.runtime} min</div> : null}
             </div>
@@ -120,6 +109,7 @@ const useStyles = createUseStyles({
     border-radius: 50%;
     display: grid;
     place-items: center;
+    flex-shrink: 0;
   `,
   titleAndRating: {
     display: 'flex',

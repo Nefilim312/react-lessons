@@ -1,7 +1,7 @@
 import React from 'react';
 import FilmTile from '../FilmTile/FilmTile';
+import Loader from '../Loader/Loader';
 import { createUseStyles } from 'react-jss';
-import { Loader } from '../Loader/Loader';
 import { BACKGROUND } from '../../constants/styles';
 
 interface FilmListProps {

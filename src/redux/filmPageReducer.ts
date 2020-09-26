@@ -5,6 +5,7 @@ import {
   HIDE_LOADER,
   ActionTypes,
 } from './types';
+import { HYDRATE } from 'next-redux-wrapper';
 
 const initialState: IFilmPageState = {
   movies: [],
@@ -34,6 +35,11 @@ export function filmPageReducer(
       return { ...state, loading: true };
     case HIDE_LOADER:
       return { ...state, loading: false };
+    case HYDRATE:
+      return {
+        ...state,
+        ...action.payload.filmPage,
+      };
     default:
       return state;
   }

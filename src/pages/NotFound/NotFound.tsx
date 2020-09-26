@@ -5,14 +5,18 @@ import { createUseStyles } from 'react-jss';
 import { useHistory } from 'react-router-dom';
 import { RED, BACKGROUND } from '../../constants/styles';
 
-const NotFound: React.FC = () => {
+interface IErrorProps {
+  errorCode?: number;
+}
+
+const NotFound: React.FC<IErrorProps> = ({ errorCode = 404 }) => {
   const classes = useStyles();
   const history = useHistory();
 
   return (
     <div className={classes.fullPage}>
       <div className={classes.errorContainer}>
-        <div className={classes.error}>404</div>
+        <div className={classes.error}>{errorCode}</div>
 
         <Button onClick={() => history.goBack()}>BACK</Button>
       </div>
