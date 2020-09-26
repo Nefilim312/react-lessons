@@ -5,9 +5,9 @@ import {
   HIDE_LOADER,
   ActionTypes,
 } from './types';
-import { REHYDRATE } from 'redux-persist';
+import { HYDRATE } from 'next-redux-wrapper';
 
-const initialState: IMainPageState = {
+export const initialState: IMainPageState = {
   movies: [],
   filter: { search: '', searchBy: 'title', sortBy: 'release_date' },
   loading: false,
@@ -26,10 +26,10 @@ export function mainPageReducer(
       return { ...state, loading: true };
     case HIDE_LOADER:
       return { ...state, loading: false };
-    case REHYDRATE:
+    case HYDRATE:
       return {
         ...state,
-        movies: action.payload.mainPage.movies,
+        ...action.payload.mainPage,
       };
     default:
       return state;

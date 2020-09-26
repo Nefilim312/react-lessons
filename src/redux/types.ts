@@ -1,4 +1,5 @@
 import { REHYDRATE } from 'redux-persist';
+import { HYDRATE } from 'next-redux-wrapper';
 export const REQUEST_MOVIES = 'REQUEST_MOVIES';
 export const CHANGE_FILTER = 'CHANGE_FILTER';
 export const SHOW_LOADER = 'SHOW_LOADER';
@@ -26,6 +27,11 @@ interface Rehydrate {
   payload: IState;
 }
 
+interface Hydrate {
+  type: typeof HYDRATE;
+  payload: IState;
+}
+
 interface RequestSimilarMoviesAction {
   type: typeof REQUEST_SIMILAR_MOVIES;
   payload: IFilm[];
@@ -42,4 +48,5 @@ export type ActionTypes =
   | ToggleLoaderAction
   | RequestSimilarMoviesAction
   | LoadFilmAction
-  | Rehydrate;
+  | Rehydrate
+  | Hydrate;

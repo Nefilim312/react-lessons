@@ -10,9 +10,9 @@ interface IFilm {
 }
 
 interface IFilter {
-  search: string;
-  searchBy: 'title' | 'genres';
-  sortBy: 'release_date' | 'vote_average';
+  search?: string;
+  searchBy?: 'title' | 'genres';
+  sortBy?: 'release_date' | 'vote_average';
   limit?: string;
   filter?: string;
 }
