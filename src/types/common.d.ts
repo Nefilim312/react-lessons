@@ -10,15 +10,26 @@ interface IFilm {
 }
 
 interface IFilter {
-  search: string;
-  searchBy: 'title' | 'genres';
-  sortBy: 'release_date' | 'vote_average';
+  search?: string;
+  searchBy?: 'title' | 'genres';
+  sortBy?: 'release_date' | 'vote_average';
   limit?: string;
   filter?: string;
 }
 
-interface IState {
+interface IMainPageState {
   movies: IFilm[];
   filter: IFilter;
   loading: boolean;
 }
+
+interface IFilmPageState {
+  movies: IFilm[];
+  film: IFilm;
+  loading: boolean;
+}
+
+type IState = {
+  mainPage: IMainPageState;
+  filmPage: IFilmPageState;
+};

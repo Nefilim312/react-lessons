@@ -1,16 +1,18 @@
-import { createStore, compose, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore, applyMiddleware, Store } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './rootReducer';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { MakeStore, createWrapper } from 'next-redux-wrapper';
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  blacklist: ['filter'],
+let store: Store | undefined;
+
+const makeStore: MakeStore<IState> = () => {
+  return createStore(
+    rootReducer,
+    composeWithDevTools(applyMiddleware(thunkMiddleware))
+  );
 };
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-const store = createStore(persistedReducer, compose(applyMiddleware(thunk)));
-const persistor = persistStore(store);
 
-export { store, persistor };
+const wrapper = createWrapper<IState>(makeStore, { debug: true });
+
+export { store, wrapper };
